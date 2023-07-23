@@ -1,0 +1,46 @@
+{
+    "name": "tglog",
+    "main": "main.js",
+    "type": "module",
+    "version": "0.1.2",
+    "description": "A tiny module for sending logs to Telegram chats.",
+    "keywords": [
+        "logs",
+        "logging",
+        "telegram"
+    ],
+    "author": "cheatsnake",
+    "license": "MIT",
+    "homepage": "https://github.com/cheatsnake/tglog#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cheatsnake/tglog.git"
+    },
+    "bugs": {
+        "url": "https://github.com/cheatsnake/tglog/issues"
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && tsc -p tsconfig.types.json && cp package.json dist/package.json && cp README.md dist/README.md && echo '{\"type\":\"module\"}' > dist/_esm/package.json && echo '{\"type\":\"commonjs\"}' > dist/_cjs/package.json"
+    },
+    "devDependencies": {
+        "@types/node": "^20.4.3",
+        "tsx": "^3.12.7",
+        "typescript": "^5.1.6"
+    },
+    "types": "./main.d.ts",
+    "typesVersions": {
+        ">=4.0": {
+            "*": [
+                "_types/*"
+            ]
+        }
+    },
+    "exports": {
+        ".": {
+            "types": "./_types/*.d.ts",
+            "require": "./_cjs/main.js",
+            "import": "./_esm/main.js",
+            "default": "./_esm/main.js"
+        }
+    }
+}
