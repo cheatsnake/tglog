@@ -2,7 +2,7 @@
     "name": "tglog",
     "main": "main.js",
     "type": "module",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A tiny module for sending logs to Telegram chats.",
     "keywords": [
         "logs",
