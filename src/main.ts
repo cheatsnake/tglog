@@ -2,7 +2,7 @@ import { MessageParams, TelegramBot, bold } from "./telegram.js";
 
 const EMOJI = { info: "💬", ok: "✅", warn: "🚧", err: "🚨" };
 
-type LogOptions = Omit<MessageParams, "chatId"> & {
+type LoggerOptions = Omit<MessageParams, "chatId"> & {
     wrapAsCode?: boolean;
     ignoreErrors?: boolean;
     timeMetadata?: boolean;
@@ -12,9 +12,9 @@ type LogData = string | Object;
 
 export default class TelegramLogger {
     private bot: TelegramBot;
-    private options: LogOptions;
+    private options: LoggerOptions;
 
-    constructor(botToken: string, chatId: string, options?: LogOptions) {
+    constructor(botToken: string, chatId: string, options?: LoggerOptions) {
         this.bot = new TelegramBot(botToken, { chatId, ...options });
         this.options = {
             wrapAsCode: true,
@@ -26,57 +26,62 @@ export default class TelegramLogger {
         };
     }
 
-    async info(data: LogData, options = this.options) {
+    async info(data: LogData, options?: LoggerOptions) {
         try {
-            const text = this.prepareLog(data, options, `${EMOJI.info} ${bold("Information", options)}`);
-            const resp = await this.bot.sendMessage(text, options);
+            const opt = options ? { ...this.options, ...options } : this.options;
+            const text = this.prepareLog(data, opt, `${EMOJI.info} ${bold("Information", opt)}`);
+            const resp = await this.bot.sendMessage(text, opt);
             return resp;
         } catch (error) {
-            if (options.ignoreErrors) return;
+            if ({ ...this.options, ...options }.ignoreErrors) return;
             throw error;
         }
     }
 
-    async ok(data: LogData, options = this.options) {
+    async ok(data: LogData, options?: LoggerOptions) {
         try {
-            const text = this.prepareLog(data, options, `${EMOJI.ok} ${bold("Success", options)}`);
-            const resp = await this.bot.sendMessage(text, options);
+            const opt = options ? { ...this.options, ...options } : this.options;
+            const text = this.prepareLog(data, opt, `${EMOJI.ok} ${bold("Success", opt)}`);
+            const resp = await this.bot.sendMessage(text, opt);
             return resp;
         } catch (error) {
-            if (options.ignoreErrors) return;
+            if ({ ...this.options, ...options }.ignoreErrors) return;
             throw error;
         }
     }
 
-    async warn(data: LogData, options = this.options) {
+    async warn(data: LogData, options?: LoggerOptions) {
         try {
-            const text = this.prepareLog(data, options, `${EMOJI.warn} ${bold("Warning", options)}`);
-            const resp = await this.bot.sendMessage(text, options);
+            const opt = options ? { ...this.options, ...options } : this.options;
+            const text = this.prepareLog(data, opt, `${EMOJI.warn} ${bold("Warning", opt)}`);
+            const resp = await this.bot.sendMessage(text, opt);
             return resp;
         } catch (error) {
-            if (options.ignoreErrors) return;
+            if ({ ...this.options, ...options }.ignoreErrors) return;
             throw error;
         }
     }
 
-    async err(data: LogData, options = this.options) {
+    async err(data: LogData, options?: LoggerOptions) {
         try {
-            const text = this.prepareLog(data, options, `${EMOJI.err} ${bold("Error", options)}`);
-            const resp = await this.bot.sendMessage(text, options);
+            const opt = options ? { ...this.options, ...options } : this.options;
+            const text = this.prepareLog(data, opt, `${EMOJI.err} ${bold("Error", opt)}`);
+            const resp = await this.bot.sendMessage(text, opt);
             return resp;
         } catch (error) {
-            if (options.ignoreErrors) return;
+            if ({ ...this.options, ...options }.ignoreErrors) return;
             throw error;
         }
     }
 
-    async raw(data: LogData, options = this.options) {
+    async raw(data: LogData, options?: LoggerOptions) {
         try {
-            const text = this.prepareLog(data, options);
-            const resp = await this.bot.sendMessage(text, options);
+            const opt = options ? { ...this.options, ...options } : this.options;
+            const text = this.prepareLog(data, opt);
+            const resp = await this.bot.sendMessage(text, opt);
             return resp;
         } catch (error) {
-            if (options.ignoreErrors) return;
+            if ({ ...this.options, ...options }.ignoreErrors) return;
             throw error;
         }
     }
