@@ -4,6 +4,7 @@ const EMOJI = { info: "💬", ok: "✅", warn: "🚧", err: "🚨" };
 
 type LoggerOptions = Omit<MessageParams, "chatId"> & {
     wrapAsCode?: boolean;
+    codeExtension?: string;
     ignoreErrors?: boolean;
     timeMetadata?: boolean;
 };
@@ -18,6 +19,7 @@ export default class TelegramLogger {
         this.bot = new TelegramBot(botToken, { chatId, ...options });
         this.options = {
             wrapAsCode: true,
+            codeExtension: "",
             ignoreErrors: true,
             parseMode: "HTML",
             disableNotification: false,
@@ -91,7 +93,7 @@ export default class TelegramLogger {
 
         if (options.wrapAsCode) {
             if (options.parseMode === "HTML") text = `<code>${text}</code>`;
-            if (options.parseMode?.includes("Markdown")) text = `\`\`\`\n${text}\n\`\`\``;
+            if (options.parseMode?.includes("Markdown")) text = `\`\`\`${options.codeExtension ?? ""}\n${text}\n\`\`\``;
         }
 
         if (prefix) text = `${prefix}\n\n${text}`;

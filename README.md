@@ -34,6 +34,7 @@ const tglog = new TelegramLogger(BOT_TOKEN, CHAT_ID, {
     // All parametes below are optional
     messageThreadId: 0, // Unique identifier for the target message thread (topic) of the forum
     wrapAsCode: true, // Will format your messages as code
+    codeExtension: "", // Extension for wrapped code (json, sql, xml, js, ts, etc.). It works with markdown mode and enabled wrapAsCode option.
     ignoreErrors: true, // Will ignore internal errors that may occur in this module
     parseMode: "HTML", // https://core.telegram.org/bots/api#formatting-options
     disableNotification: false, // Users will receive a notification with no sound
