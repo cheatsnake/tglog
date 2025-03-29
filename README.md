@@ -10,6 +10,8 @@ A tiny module for sending logs to Telegram chats.
 npm install tglog
 ```
 
+> Node.js 18+ required.
+
 Import into your project:
 
 ```js
