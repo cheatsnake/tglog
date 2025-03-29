@@ -2,7 +2,7 @@
     "name": "tglog",
     "main": "./dist/main.js",
     "type": "module",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A tiny module for sending logs to Telegram chats.",
     "keywords": [
         "logs",
@@ -29,6 +29,7 @@
         "typescript": "^5.8.2"
     },
     "types": "./dist/main.d.ts",
+    "files": ["dist"],
     "exports": {
         ".": {
             "types": "./dist/main.d.ts",
