@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es2016",
-        "module": "commonjs",
+        "target": "es2020",
+        "module": "ESNext",
         "esModuleInterop": true,
         "rootDir": "./src",
         "outDir": "./dist",
@@ -9,5 +9,5 @@
         "strict": true,
         "skipLibCheck": true
     },
-    "exclude": ["./node_modules", "./test", "./dist"]
+    "exclude": ["./node_modules", "./test", "./dist", "./tsup.config.ts"]
 }
